@@ -1,41 +1,55 @@
-# Compiled Lua sources
-luac.out
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "TennaCJRO864"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+local text = Instance.new("TextLabel")
+text.BackgroundTransparency = 1
+text.Position = UDim2.new(0, 15, 0, 15)
+text.Size = UDim2.new(0, 300, 0, 40)
+text.Font = Enum.Font.GothamBold
+text.Text = "TENNA CJRO864"
+text.TextSize = 24
+text.TextXAlignment = Enum.TextXAlignment.Left
+text.Parent = gui
 
-# Precompiled Headers
-*.gch
-*.pch
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(0.4, Color3.fromRGB(0, 255, 0)),
+    ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 255, 255)),
+    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0, 100, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 255))
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
+})
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+gradient.Parent = text
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+task.spawn(function()
 
+    while text.Parent do
+
+        gradient.Offset = Vector2.new(-1, 0)
+
+        local tween = TweenService:Create(
+
+            gradient,
+
+            TweenInfo.new(2, Enum.EasingStyle.Linear),
+
+            {Offset = Vector2.new(1, 0)}
+
+        )
+
+        tween:Play()
+
+        tween.Completed:Wait()
+
+    end
+
+end)
